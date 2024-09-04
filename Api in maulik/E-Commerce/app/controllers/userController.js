@@ -299,6 +299,7 @@ const cart = async(req, res) => {
         if (!quantity) {
             quantity = 1;
         }
+        const tax = 0;
 
         const user = await User.findOne({ where: { id: userId } });
         if (!user) {
