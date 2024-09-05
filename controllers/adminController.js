@@ -47,7 +47,7 @@ const login = async(req, res) => {
             where: {
                 email
             }
-        });
+        })
         if(!admin){
             return response(res, statusCodes.BAD_REQUEST, "Invalid credentials")
         }
