@@ -7,7 +7,7 @@ const User = require('./routes/userRoute');
 app.use(express.json());
 
 
-const port = process.env.PORT;
+const port = process.env.PORT || 25472;
 
 app.use('/admin', Admin)
 app.use('/user', User)
