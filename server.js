@@ -1,8 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const Admin = require('./app/routes/adminRoute');
-const User = require('./app/routes/userRoute');
+const Admin = require('./routes/adminRoute');
+const User = require('./routes/userRoute');
 
 app.use(express.json());
 
