@@ -21,7 +21,7 @@ const cart = sequelize.define('carts', {
         allowNull: false
     },
     product_price: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         allowNull: false
     },
     product_discount: {

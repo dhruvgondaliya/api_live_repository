@@ -299,7 +299,6 @@ const cart = async(req, res) => {
         if (!quantity) {
             quantity = 1;
         }
-        const tax = 0;
 
         const user = await User.findOne({ where: { id: userId } });
         if (!user) {
@@ -318,19 +317,29 @@ const cart = async(req, res) => {
         }
 
         const cartItems = [];
-        for (let i = 0; i < details.length; i++) {
+        let totalPrice = 0; // Initialize totalPrice to 0
+
+        for (const detail of details) {
+            // Convert discount from percentage string to number
+            const discountValue = parseFloat(detail.product_discount) / 100;
+
             const add = await Cart.create({
-                details_id: details[i].id,
-                product_name: details[i].product_name,
-                product_price: details[i].product_price,
-                product_discount: details[i].product_discount,
+                details_id: detail.id,
+                product_name: detail.product_name,
+                product_price: detail.product_price,
+                product_discount: detail.product_discount,
                 quantity
             });
             cartItems.push(add);
+
+            const finalPrice = (detail.product_price - (detail.product_price * discountValue)) * quantity;
+            totalPrice += finalPrice; 
         }
+        const tax = totalPrice * 0.10;
+        const totalWithTax = totalPrice + tax;
 
         if (cartItems.length > 0) {
-            return response(res, statusCodes.SUCCESS, "Cart added successfully", cartItems);
+            return response(res, statusCodes.SUCCESS, "Cart added successfully", { cartItems, totalPrice, tax, totalWithTax });
         } else {
             return response(res, statusCodes.SERVER_ERROR, "Server error");
         }
@@ -340,7 +349,6 @@ const cart = async(req, res) => {
         return response(res, statusCodes.SERVER_ERROR, "Server error");
     }
 };
-
 
 
 
