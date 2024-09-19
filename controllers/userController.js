@@ -99,7 +99,6 @@ const productAdd = async(req, res) => {
         if(!user){
             return response(res, statusCodes.NOT_FOUND, "User not found")
         }
-        const product = await Add_Product.findOne({ where: { user_id: user.id } })
         const { product_name, product_discription, product_price, product_discount, product_brand, product_colour, category, return_policy } = req.body
         if(!product_name || !product_discription || !product_price || !product_discount || !product_brand || !product_colour || !category){
             return response(res, statusCodes.NOT_FOUND, "Please enter product_name, product_discription, product_price, product_discount, product_brand, product_colour, category")
