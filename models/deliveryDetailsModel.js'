@@ -2,50 +2,46 @@ const { DataTypes } = require('sequelize');
 
 const sequelize = require('../config/database');
 
-const homeScreen = sequelize.define('home_screens', {
+const delivery_detail = sequelize.define('delivery_details', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
-    product_id: {
+    cart_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            table: "add_products",
+            table: "carts",
             field: 'id'
         }
     },
-    product_name: {
+    your_name: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    product_discription: {
+    address: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    city: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    pincode: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    state: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    phone_number: {
         type: DataTypes.STRING,
         allowNull: false
     },
     product_price: {
         type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    product_brand: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    product_colour: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    product_discount: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    category: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    return_policy: {
-        type: DataTypes.STRING,
         allowNull: false
     },
     created_at: {
@@ -58,4 +54,4 @@ const homeScreen = sequelize.define('home_screens', {
     timestamps: false,
 });
 
-module.exports = homeScreen;
+module.exports = delivery_detail;
