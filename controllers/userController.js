@@ -128,6 +128,7 @@ const productAdd = async(req, res) => {
     }
 }
 
+
 const getProduct = async(req, res) => {
     try{
         const userId = req.headers.userId;
